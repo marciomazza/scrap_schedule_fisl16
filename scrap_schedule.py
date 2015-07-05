@@ -32,6 +32,9 @@ def get_slot(slot_div):
 
 
 def day_slots(day):
+    # TODO get from url
+    # (with something that processes javascript,
+    #  since the DOM is dynamically constructed)
     filename = '%s.html' % day
     with open(filename, 'r') as f:
         content = f.read()
@@ -59,3 +62,8 @@ tracks = {s['track'] for s in slots}
 
 def search(word):
     return [s for s in slots if word.lower() in s['title'].lower()]
+
+
+def remove(list):
+    for l in list:
+        slots.remove(l)
