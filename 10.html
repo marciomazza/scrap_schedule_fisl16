@@ -1,0 +1,3440 @@
+<html class="ng-scope" ng-app="segue.schedule"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <title>fisl - grade de horários</title>
+    <!-- inject:vendor:css -->
+    <link rel="stylesheet" href="/public/segue-v.css">
+    <!-- endinject -->
+    <!-- inject:custom:css -->
+    <link rel="stylesheet" href="/public/segue-c.css">
+    <!-- endinject -->
+    <!-- inject:vendor:js -->
+    <script src="/public/segue-v.js"></script>
+    <!-- endinject -->
+    <!-- inject:custom:js -->
+    <script src="/public/segue-c.js"></script>
+    <!-- endinject -->
+    <!-- inject:templates:js -->
+    <script src="/public/templates.js"></script>
+    <!-- endinject -->
+    <script src="config.js"></script>
+  </head>
+  <body ng-controller="ScheduleController" class="schedule">
+    <!-- uiView: header --><header class="noprint schedule" ui-view="header"><img class="logo ng-scope" ng-click="home()" src="/images/logo-fisl-small.png">
+<h1 class="ng-scope">
+  grade de horários
+</h1>
+<div class="days ng-scope">
+  <!-- ngRepeat: day in days --><div class="day ng-scope" ng-repeat="day in days">
+    <button href="#/2015-07-08" class="ng-binding" ng-class="{ current: day == currentDay }" ui-sref="schedule({day: day})">dia 8</button>
+  </div><!-- end ngRepeat: day in days --><div class="day ng-scope" ng-repeat="day in days">
+    <button href="#/2015-07-09" class="ng-binding" ng-class="{ current: day == currentDay }" ui-sref="schedule({day: day})">dia 9</button>
+  </div><!-- end ngRepeat: day in days --><div class="day ng-scope" ng-repeat="day in days">
+    <button href="#/2015-07-10" class="ng-binding current" ng-class="{ current: day == currentDay }" ui-sref="schedule({day: day})">dia 10</button>
+  </div><!-- end ngRepeat: day in days --><div class="day ng-scope" ng-repeat="day in days">
+    <button href="#/2015-07-11" class="ng-binding" ng-class="{ current: day == currentDay }" ui-sref="schedule({day: day})">dia 11</button>
+  </div><!-- end ngRepeat: day in days -->
+</div>
+</header>
+
+    <!-- uiView: main --><main class="schedule schedule-undefined" ui-view="main"><div style="position: absolute;" class="hours-row ng-scope" fixed-vertical="">
+  <!-- ngRepeat: hour in hours --><div class="hour hour-9" ng-repeat="hour in hours">9:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-10" ng-repeat="hour in hours">10:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-11" ng-repeat="hour in hours">11:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-12" ng-repeat="hour in hours">12:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-13" ng-repeat="hour in hours">13:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-14" ng-repeat="hour in hours">14:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-15" ng-repeat="hour in hours">15:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-16" ng-repeat="hour in hours">16:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-17" ng-repeat="hour in hours">17:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-18" ng-repeat="hour in hours">18:00</div><!-- end ngRepeat: hour in hours --><div class="hour hour-19" ng-repeat="hour in hours">19:00</div><!-- end ngRepeat: hour in hours -->
+</div>
+
+<div style="position: absolute;" class="room-column ng-scope" fixed-horizontal="">
+  <!-- ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">40T</div>
+    <div class="capacity ng-binding">506 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">41A</div>
+    <div class="capacity ng-binding">351 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">41B</div>
+    <div class="capacity ng-binding">350 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">41C</div>
+    <div class="capacity ng-binding">250 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">41D</div>
+    <div class="capacity ng-binding">250 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">41E</div>
+    <div class="capacity ng-binding">250 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">41F</div>
+    <div class="capacity ng-binding">250 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">40A</div>
+    <div class="capacity ng-binding">110 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">712 - OF1</div>
+    <div class="capacity ng-binding">40 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">713 Mozilla</div>
+    <div class="capacity ng-binding">40 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">714</div>
+    <div class="capacity ng-binding">70 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">715</div>
+    <div class="capacity ng-binding">70 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">Paulo Freire</div>
+    <div class="capacity ng-binding">20 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">Lab. Tec. Livre</div>
+    <div class="capacity ng-binding">20 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms --><header class="ng-scope" ng-repeat="room in rooms">
+    <img class="ng-hide" src="images/loading.gif" ng-hide="slotsOfRoom[room.id]">
+    <div class="name ng-binding">Hackaton Robot.</div>
+    <div class="capacity ng-binding">20 pessoas</div>
+  </header><!-- end ngRepeat: room in rooms -->
+</div>
+
+<div class="slots ng-scope">
+  <!-- ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Project Caua Update: Let's Go!</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Jon Anderson Hall</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/793" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Cloud Computing
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Unifying Events and Log into the Cloud with Open Source Software</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Eduardo Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/809" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Administração - Administração de Sistemas
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Containers and systemd</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Lennart Poettering</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/777" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Humor, Programação e Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Andre Noel</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/808" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Hardware Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Construindo um Novena: O Laptor Open Source</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Sean Cross</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/788" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Administração - Segurança
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Using DRM technologies to protect users</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Matthew Garrett</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/786" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Privacidade e Vigilância
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">The importance of Software Freedom Conservancy's work.</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Karen Sandler</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/790" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Governance makes the Difference: the case of AppHub, the European open source ma</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Thomas</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/632" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Linguagens de programação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Introduction to the Dart language</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Randal L. Schwartz</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/779" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-19 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40T</span>
+    <span class="hour ng-binding"><b>horário:</b> 19:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Privacidade e Vigilância
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">A Internet das Coisas Livres vencendo os gigantes da vigilância e do controle</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Silvio Rhatto</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/283" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Linguagens de programação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Sherlock Holmes e o mistério das 50 milhões de páginas</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Marcelo Jorge Vieira</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/367" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Ferramentas, Metodologias e Padrões
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Desmistificando o Phonegap</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Loiane Groner</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/399" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">O Software Livre no Governo Federal, desafios e disputas</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Deivi Lopes Kuhn</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/863" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Administração - Administração de Sistemas
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Big Data &amp; Analytics com Pentaho Community Edition</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Marcio Junior Vieira</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/135" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Linguagens de programação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Aprendendo Redes Neurais Fácil no GNU/Linux</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Wellton Costa de Oliveira</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/572" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Painel CETI: Cidades Digitais e Oportunidades Locais</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/810" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Ferramentas, Metodologias e Padrões
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Ciclo de desenvolvimento de um software livre, o caso Noosfero</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Daniela Feitosa</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/813" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Dados Abertos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Visualizando votações legislativas com o Radar Parlamentar</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Leonardo Alexandre Ferreira Leite</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/178" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-19 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41A</span>
+    <span class="hour ng-binding"><b>horário:</b> 19:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Democracia Digital - estudo de caso do Gabinete Digital e do Participa.br</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Haydee Svab</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/389" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Software Livre um desafio a mudança</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Marcos Mazoni</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/861" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">WoMoz: Lutando pela presença de minorias nos projetos FLOSS</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Melissa Devens</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Lourdes Castillo</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/237" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Arquitetura Big Data OpenBus</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Jose Fernandez Gavela</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Felipe Dias</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Gabriel Mochnacs</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/546" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">A nova plataforma do Software Público Brasileiro: integração de ambientes livres</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Marisa Souza dos Santos</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Paulo Meirelles</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Nayanne Araújo Bonifácio</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Arthur Del Esposte</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/815" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">O papel do hacker na socializacao dos saberes científicos e tecnológicos</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Luciano Sergio Ventin Bomfim</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/816" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Digitização com Software Livre no Banco do Brasil</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Dinis Agostinho dos Santos</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Ana Barcellos</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/881" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Como usar Software Livre para ser dono do seu tempo e viver vida nos seus termos</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Henrique Bastos</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/812" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Acesso Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Hackeando o Estado - Como reprogramar a sociedade usando o hackerativismo</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Diego Aguilera</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/203" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Hardware Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Identificação de fraudes em placas de bomba de combustível líquido</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Roberto Lima do Amaral</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Bruno Erthal</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/745" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-19 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41B</span>
+    <span class="hour ng-binding"><b>horário:</b> 19:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Hackerspaces feministas: reduzindo a desigualdade de gênero na tecnologia</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Carine Gomes Roos</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/677" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Registro Eletrônico de Saúde: Padrões de Desenvolvimento e Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">moacyr esteves perche</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/883" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Hardware Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Inove com Arduino!</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Jairo Lenfers</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/65" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Linguagens de programação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">TDD com Mock e Orientação à Objetos</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Bernardo Botelho Fontes</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/614" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Governança da Internet
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">A Iniciativa Net Mundial e a importância do engajamento na Governança da Interne</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">João Carlos Caribé</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Marilia Maciel</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Cristiana Gonzalez</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/819" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Painel: Mulheres no mercado de trabalho de TI</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Adriana Costa</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Loiane Groner</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Claudia Melo</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Simone Pittner</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Luciana Bolan Frigo</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/567" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desktop - Aplicações Desktop
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Painel: fazendo ilustrações com Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">João Sebastião de Oliveira Bueno</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Elias de Carvalho Silveira</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">cadunico</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Luciano Lourenço</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Andre Noel</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/820" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41C</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Painel: políticas de Cultura Digital e Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">fabianne batista balvedi</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Janaina Menegaz Spode</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/821" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Debian: o que é, e como funciona</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Antonio Terceiro</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/864" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Não sou programador, como posso ajudar o Projeto Debian?</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Luiz Guaraldo</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/865" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Tradução do Debian para Português do Brasil</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Adriano Rafael Gomes</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/866" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Como se tornar um membro oficial do Debian (DD ou DM)</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">João Eriberto Mota Filho</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/867" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Empacotamento de software no Debian</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">João Eriberto Mota Filho</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/166" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Dependências de pacotes de código fonte</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Thadeu Lima de Souza Cascardo</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/868" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Melhorando o Debian, democratizando a configuração de servidores</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Antonio Terceiro</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/869" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Projeto Debile + Experiência no GSoC</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Lucas Kanashiro</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/870" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41D</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - miniDebConf
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Perguntas e Repostas sobre o Debian</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/871" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - Principal
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Encontro Comunitário do openSUSE</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Domingos Teruel</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/616" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Ferramentas, Metodologias e Padrões
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Managenment 3.0: A vida pós-agilidade</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Fernando Ike</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/732" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Cloud Computing
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Sua aplicação na nuvem do jeito certo</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Tarsis Figueredo Azevedo</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Cezar Espinola</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/25" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Cultura, Filosofia, e Política
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Democracia digital: participação e cidadania no século XXI</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/854" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Hardware Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Desenvolvendo Hardware Livre com Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Thalis Antunes de Souza</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Felipe Cezar</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Emiliano Veiga</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/325" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Administração - Administração de Sistemas
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Como encontrar uma agulha num palheiro de logs</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Dickson S. Guedes</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/132" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Hardware Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Light On Management</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Daniel Pimentel</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/374" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-19 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41E</span>
+    <span class="hour ng-binding"><b>horário:</b> 19:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Administração - Sistemas operacionais
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Linux Containers</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Bruno Barcarol Guimarães</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/447" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Prod. e desenv. de conteúdos digitais criativos p/ dispositivos móveis e TV Digi</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/814" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Cloud Computing
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Openstack, Computação em Nuvem e Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Alessandro Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/752" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desktop - Jogos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Blender 3D, modelagem e animação para games</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Victor Moreira</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/448" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Ferramentas, Metodologias e Padrões
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Construindo um site acessível</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Lael Nervis</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Ricardo Moro</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/294" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Ferramentas, Metodologias e Padrões
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Revolução harmônica entre webapps e apps móveis nativos: Intel XDK</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Roberson Junior Fernandes Alves</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/597" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Energia Livre
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">LED movido a vento</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Guilherme Zanatta Tocchetto</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Adriano Canabarro Teixeira</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Leonardo Costella</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/426" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Painel: Seminário - conclusão dos trabalhos "Vamos hackear a Educação"</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Ana Cristina Fricke Matte</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Frederico Gonçalves Guimarães</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Clarisse Lima Abrahão</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Ronald Emerson Scherolt da Costa</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/928" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">BigBlueButton : Administração Pública contratando Software Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Fabiano Martins</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/739" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-19 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 41F</span>
+    <span class="hour ng-binding"><b>horário:</b> 19:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Software Livre na Educação pelo Mundo</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Manuel Zunguze</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">tarcisio postingher</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Alejandro Javier Cena</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/845" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40A</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - Principal
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Encontro Comunitário do KDE</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Filipe Saraiva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/818" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40A</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Inclusão Digital
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Tecnologias Assistivas do Sistema Linux para acessibilidade das pessoas cegas e</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Emanuel Noimann dos Santos</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/878" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40A</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Linguagens de programação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">"Estrutura de Dados com Python?"</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Fernando Masanori</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/175" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40A</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Project Cauã - The path of the Entrepreneur / O caminho do Empreendedor</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Jon Anderson Hall</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Douglas Conrad</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/822" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-300" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 40A</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 300min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - WSL
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">XVI Workshop Internacional de Software Livre (WSL 2015) - 2o. dia</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Sandro Santos Andrade</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/823" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-240" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 712 - OF1</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 240min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Oficinas - Oficinas
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina de Antivigilância: Oficina de Autodefesa Contra Vigilância</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">joana varon</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Fernanda Shirakawa</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Lucas Teixeira</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/824" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-180" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 712 - OF1</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 180min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Oficinas - Oficinas
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Phonegap + Ionic</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Loiane Groner</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/825" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-180" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 712 - OF1</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 180min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Oficinas - Oficinas
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Tutorial prático de IPv6</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Antonio Marcos Moreiras</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Tiago Nakamura</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Lucenildo Lins</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/435" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - Principal
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Feira de troca de addons</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/961" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - ASL
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Organização</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/886" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desktop - Aplicações Desktop
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Install Fest Mozilla</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/951" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - ASL
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Organização</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/886" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Inclusão Digital
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Webmaker: Faça algo incrível com a Web!</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/962" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - Principal
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Photo Booth com a Fox</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/963" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desktop - Aplicações Desktop
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Hands-on de localização</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/959" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desenvolvimento - Ferramentas, Metodologias e Padrões
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Firefox Developer Tools</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/964" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 713 Mozilla</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Desktop - Jogos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Mini Games Night / Photo Booth com a Fox</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Rodrigo Pereira da Silva</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/955" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 714</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Rede de participação na Educação</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Ronald Emerson Scherolt da Costa</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Ana Cristina Fricke Matte</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/933" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-240" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 714</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 240min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Trabalhos dos GTs do Seminário</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Ronald Emerson Scherolt da Costa</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Frederico Gonçalves Guimarães</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/934" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 714</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Ecossistema - Negócios, Migrações e Casos
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Maratona Startup Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">André Luís Eloy Soares</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Nick Vidal</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/949" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 714</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Administração - Segurança
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Segurança e vulnerabilidades mais comuns</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Ariadne Pinheiro</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/228" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 714</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Tópicos Emergentes - Hardware Aberto
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Robótica Nas Escolas Públicas</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Guilherme Robert Silveira Santos</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Thalis Antunes de Souza</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/19" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-19 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 714</span>
+    <span class="hour ng-binding"><b>horário:</b> 19:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - ASL
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Organização</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/886" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-480" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 715</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 480min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - ASL
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Expresso</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Organização</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/935" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> 715</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Encontros Comunitários - Principal
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Novas mídias e transformação social - exibição do filme "Levante!" e debate</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Pedro Rosa</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Gabriel Galli</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Marcelo Branco</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/967" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-9 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 09:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Tabela Dinâmica Software Educacional Livre</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Paulo Francisco Slomp</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/181" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-10 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 10:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Alguns pontos da história da informática e da Internet - 1940...1990 DC</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Fatima Conti</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/223" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Robótica Libre Universidad Abierta Interamericana - UAI - Argentina</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Alejandro Javier Cena</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/849" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-12 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 12:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Interfaces entre Cultura Livre e Educação</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Clarisse Lima Abrahão</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/925" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Softwares livres e possibilidades pedagógicas</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Clarisse Lima Abrahão</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/945" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-14 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 14:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Drones com Hardware Livre e a Revolução Maker</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Eduardo Attuy Carvalho</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Claudio Olmedo</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/926" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Mesa-redonda: Hardware Livre para Robótica Educacional</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Claudio Olmedo</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Germano Postal</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Maureu Jefferson Benvenho</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Juliano Dal Pont</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/927" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-17 duration-180" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Paulo Freire</span>
+    <span class="hour ng-binding"><b>horário:</b> 17:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 180min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Robótica Educacional com Projeto Colaboraivo Jabuti Edu</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Maria Inês Castilho</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Patricia Almeida da Silva</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">maregito</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">dulce mara scota</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Geiseane Lacerda Rubi</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">ENOQUE CALVINO MELO ALVES</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Karen Borges</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Frederico Gonçalves Guimarães</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/848" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-9 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Lab. Tec. Livre</span>
+    <span class="hour ng-binding"><b>horário:</b> 09:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Gcompris - atividades para crianças de idade de 2 e 10 anos</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Frederico Gonçalves Guimarães</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/929" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-11 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Lab. Tec. Livre</span>
+    <span class="hour ng-binding"><b>horário:</b> 11:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Desenhando circuitos eletrônicos com KiCAD</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Lucas Leal</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Gabriel Krieger</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/887" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-13 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Lab. Tec. Livre</span>
+    <span class="hour ng-binding"><b>horário:</b> 13:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Desenvolvendo Objetos de Aprendizagem com o Software Scratch</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Gislaine</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Jorge da Silva Brandão</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/397" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-15 duration-60" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Lab. Tec. Livre</span>
+    <span class="hour ng-binding"><b>horário:</b> 15:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 60min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Scratch como Ferramenta para Introdução a Programação</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Necleto Pansera Junior</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autor:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Fabrícia Noronha</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/930" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-16 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Lab. Tec. Livre</span>
+    <span class="hour ng-binding"><b>horário:</b> 16:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Programando Arduino com S4A (Scratch for Arduino) e Ardublock</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Douglas Sulis da Costa</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/931" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-18 duration-120" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Lab. Tec. Livre</span>
+    <span class="hour ng-binding"><b>horário:</b> 18:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 120min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Oficina: Lógica de Programação com Software Educacional Etoys</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">BRUNO FAGUNDES SPERB</span>
+  </div>
+
+  <div class="coauthors ng-hide" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/932" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms --><div class="slot-line ng-scope" ng-repeat="room in rooms">
+    <!-- ngInclude: undefined --><ng-include class="ng-scope" src="'modules/templates/slot.html'"><!-- ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-9 duration-780" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Hackaton Robot.</span>
+    <span class="hour ng-binding"><b>horário:</b> 09:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 780min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Hackathon 2 (Temática: Saúde)</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Luciano Sergio Ventin Bomfim</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Maureu Jefferson Benvenho</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Daniel Basconcello Filho</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Germano Postal</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Douglas Sulis da Costa</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Diego Henrique de Oliveira</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Eloir José Rockenbach</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/946" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] --><div class="slot hour-22 duration-660" ng-class="{zoomed: slot.id == zoomedId}" ng-show="slot.talk" ng-click="zoomOnSlot(slot,$event)" ng-repeat="slot in slotsOfRoom[room.id]">
+
+  <div class="info">
+    <span class="room ng-binding"><b>sala:</b> Hackaton Robot.</span>
+    <span class="hour ng-binding"><b>horário:</b> 22:00:00</span>
+    <span class="duration ng-binding"><b>duração:</b> 660min</span>
+    <button class="close" ng-click="resetZoom($event)">×</button>
+  </div>
+
+  <div ng-show="slot.talk" class="track ng-binding">
+    <label>trilha:</label>
+    Educação - Educação
+  </div>
+  <div class="title">
+    <label>título:</label>
+    <span class="filled ng-binding" ng-show="slot.talk">Hackathon 2 (Temática: Saúde)</span>
+  </div>
+
+  <div class="author">
+    <label>autor principal:</label>
+    <span class="ng-binding">Luciano Sergio Ventin Bomfim</span>
+  </div>
+
+  <div class="coauthors" ng-show="slot.talk.coauthors.length">
+    <label translate="" translate-n="slot.talk.coauthors.length" translate-plural="co-autores:"><span class="ng-scope">co-autores:</span></label>
+    <!-- ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Maureu Jefferson Benvenho</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Daniel Basconcello Filho</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Germano Postal</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Douglas Sulis da Costa</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Diego Henrique de Oliveira</span><!-- end ngRepeat: coauthor in slot.talk.coauthors --><span class="ng-binding ng-scope" ng-repeat="coauthor in slot.talk.coauthors">Eloir José Rockenbach</span><!-- end ngRepeat: coauthor in slot.talk.coauthors -->
+  </div>
+
+  <div class="more">
+    <a href="#/talk/946" ui-sref="talk({id:slot.talk.id})" ng-click="$event.stopPropagation()" target="_blank">mais detalhes</a>
+  </div>
+
+</div><!-- end ngRepeat: slot in slotsOfRoom[room.id] -->
+</ng-include></div><!-- end ngRepeat: room in rooms -->
+</div>
+</main>
+
+
+</body></html>
