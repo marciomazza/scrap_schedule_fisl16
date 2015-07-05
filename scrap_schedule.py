@@ -23,7 +23,8 @@ def get_slot(slot_div):
     [hour_attribute] = [c for c in slot_div.attrs['class'] if c.startswith('hour-')]
     hour_in_class = int(hour_attribute[5:])
 
-    assert hour_in_class == int(info['hour'].split(':')[0])
+    hour, minute, second = map(int, info['hour'].split(':'))
+    assert (hour, minute, second) == (hour_in_class, 0, 0)
 
     info['url'] = 'http://schedule.fisl16.softwarelivre.org/#/talk/%s' % info['id']
 
